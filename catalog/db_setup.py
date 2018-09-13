@@ -63,6 +63,7 @@ class Disc(Base):
         }
 
 
-engine = create_engine('sqlite:///discgolfcollections.db')
+#engine = create_engine('sqlite:///discgolfcollections.db')
+engine = create_engine('postgresql://catalog:DB-PASSWORD@localhost/catalog')
 
 Base.metadata.create_all(engine)

@@ -16,14 +16,17 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask import make_response
 
-app = Flask(__name__)
+#app = Flask(__name__)
+
+from catalog import app
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/catalog/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Disc Golf Disc Collections Application"
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///discgolfcollections.db')
+#engine = create_engine('sqlite:///discgolfcollections.db')
+engine = create_engine('postgresql://catalog:DB-PASSWORD@localhost/catalog')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -74,7 +77,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/catalog/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
