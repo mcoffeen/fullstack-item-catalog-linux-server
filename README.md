@@ -190,6 +190,8 @@ restart the service to make the changes take affect
 
 ## Resources Used
 [Digital Ocean Flask App tutorial](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+
 [Flask Documentation - Larger Applications](http://flask.pocoo.org/docs/0.12/patterns/packages/)
+
 [Article on XIP.IO for web testing](https://www.wired.com/2012/06/simplify-your-website-testing-with-xip-io/)
 Several GitHub repositories of similar projects to discover missed details in documentation.
