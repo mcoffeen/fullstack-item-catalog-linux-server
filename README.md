@@ -25,6 +25,7 @@ Change line to: "PermitRootLogin no"
 Uncomment "PasswordAuthentication no"
 
 Restart the SSH service to allow the changes to take affect.
+
 `$ sudo service ssh restart`
 #### Configure the server's local timezone to UTC
 `$ sudo timedatectl set-timezone UTC`
@@ -32,27 +33,42 @@ Restart the SSH service to allow the changes to take affect.
 `$ sudo nano /etc/ssh/sshd_config`
 
 Now, logins must be done using port 2200 as follows:
-`       $ ssh grader@52.54.9.161 -I ~/.ssh/grader -p 2200`
+
+`$ ssh grader@52.54.9.161 -I ~/.ssh/grader -p 2200`
 >This will also disable the use of the web server login on the AWS site since it assumes you're using port 22 for SSH.  You'll need to SSH into the server from a shell or other utility.
 
 #### Configure UFW (Uncomplicated Firewall)
 Start by blocking all incoming connections:
+
 `$ sudo ufw default deny incoming`
+
 Allow all outgoing connections:
+
 `$ sudo ufw default allow outgoing`
+
 Allow incoming SSH connections on port 2200:
+
 `$ sudo ufw allow 2200/tcp`
 >It is also required to allow TCP on port 2200 in the AWS Lightsail network settings.
 
 Allow incoming HTTP connections on port 80 (default port):
+
 `$ sudo ufw allow www`
+
 Allow incoming NTP connections on port 123 (default port):
+
 `$ sudo ufw allow ntp`
+
 Before enabling the firewall, check what rules we created:
+
 `$ sudo ufw show added`
+
 Enable the firewall:
+
 `$ sudo ufw enable`
+
 Verify the firewall is running by checking the status:
+
 `$ sudo ufw status`
 
 #### Install Apache
@@ -63,17 +79,25 @@ Verify the firewall is running by checking the status:
 `$ sudo apt-get install postgresql postgresql-contrib`
 
 Create a PostgreSQL user `catalog`
+
 `$ sudo -u postgres createuser -P catalog`
 
 Create a database `catalog`
+
 `$ sudo -u postgres createdb -O catalog catalog`
 #### Install several packages needed for the web app to function
 `$ sudo apt-get install python-psycopg2`
+
 `$ sudo apt-get install python-flask`
+
 `$ sudo apt-get install python-sqlalchemy`
+
 `$ sudo apt-get install python-pip`
+
 `$ sudo pip install oauth2client`
+
 `$ sudo pip install requests`
+
 `$ sudo pip install httplib2`
 
 #### Update all currently installed packages
