@@ -142,7 +142,7 @@ Also, ensure the above changes are reflected in the Google Developers Console.
 
 >XIP.IO was used because Google will not accept public IP addresses as a Redirect URI
 
-#### Push the changes to the remote GitHub repo
+### Push the changes to the remote GitHub repo
 ---
 ## On the Ubuntu Server:
 ### Install git
