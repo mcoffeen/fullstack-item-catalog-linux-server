@@ -118,18 +118,25 @@ See this [Digital Ocean tutorial](https://www.digitalocean.com/community/tutoria
 Follow this page in the Flask documentation describing how to structure the files of the web app:
 [Larger Applications](http://flask.pocoo.org/docs/0.12/patterns/packages/)
 
-#### Edit engine in all Python files from SQLite to PostgreSQL
+### Edit engine in all Python files from SQLite to PostgreSQL
 Change engine variable to:
+
 `engine = create_engine('postgresql://catalog:DB-PASSWORD@localhost/catalog')`
+
 Replace DB-PASSWORD with the password created when the DB was created above
 
-#### Google OAuth Updates
+### Google OAuth Updates
 In all the Python files, change the path to the client_secrets.json file to make sure it's pointing to the full path name:
+
 `/var/www/catalog/catalog/client_secrets.json`
 
+
 In the client_secrets.json file, change the javascript_origins and redirect_URIs:
+
 `javascript_origins":["http://52.54.9.161","http://52.54.9.161.xip.io"]`
+
 `redirect_uris":["http://52.54.9.161.xip.io/login, http://52.54.9.161.xip.io/gconnect"]`
+
 
 Also, ensure the above changes are reflected in the Google Developers Console.
 
@@ -138,33 +145,47 @@ Also, ensure the above changes are reflected in the Google Developers Console.
 #### Push the changes to the remote GitHub repo
 ---
 ## On the Ubuntu Server:
-#### Install git
+### Install git
 `$ sudo apt-get install git`
 
-#### Clone the GitHub repo with the web app
+### Clone the GitHub repo with the web app
 `$ cd /var/www`
+
 `$ sudo mkdir catalog`
+
 `$ sudo chown www-data:www-data catalog/`
+
 `$ sudo -u www-data git clone https://github.com/mcoffeen/fullstack-item-catalog-linux-server.git catalog`
 
-#### Make the .git file inaccessible
+### Make the .git file inaccessible
 `$ sudo nano .htaccess`
+
 Add the line "RedirectMatch 404 /\\.git"
+
 See this page on [Hiding Git Repos on Public Sites](https://davidegan.me/hide-git-repos-on-public-sites/) for more details.
 
-#### Initialize and populate the database
+### Initialize and populate the database
 Create the database:
+
 `$ python db_setup.py`
+
 Populate the tables with example collections:
+
 `$ python add_collections.py`
 
-#### Enable Apache to Serve the App
+### Enable Apache to Serve the App
 After configuring the catalog.conf file as mentioned in the Digital Ocean tutorial linked above:
+
 disable the default host:
+
 `$ sudo a2dissite 000-default.conf`
+
 enable the catalog host:
+
 `$ sudo a2ensite catalog.conf`
+
 restart the service to make the changes take affect
+
 `$ sudo service apache2 restart`
 
 ## Resources Used
