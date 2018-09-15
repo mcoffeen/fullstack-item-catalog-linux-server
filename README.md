@@ -5,19 +5,19 @@ IP address: `52.54.9.161.xip.io`
 SSH port: `2200`
 
 # Configuring the Server
-#### Create `grader` user
+### Create `grader` user
 `$ sudo useradd -m -s grader`
 
-#### Give `grader` sudo privileges
+### Give `grader` sudo privileges
 `$ sudo usermod -aG sudo grader`
 
-#### Generate key pairs for `grader`
+### Generate key pairs for `grader`
 Generate the key pairs on the local machine and copy to authorized_keys file on server
-#### Log on to server as `grader`
+### Log on to server as `grader`
 First, cd to the location where the .ssh folder is stored on the local machine.
 
 `$ ssh grader@52.54.9.161 -i ~/.ssh/grader`
-#### Disable root login and disable password logins
+### Disable root login and disable password logins
 `$ sudo nano /etc/ssh/sshd_config`
 
 Change line to: "PermitRootLogin no"
@@ -27,9 +27,9 @@ Uncomment "PasswordAuthentication no"
 Restart the SSH service to allow the changes to take affect.
 
 `$ sudo service ssh restart`
-#### Configure the server's local timezone to UTC
+### Configure the server's local timezone to UTC
 `$ sudo timedatectl set-timezone UTC`
-#### Change the SSH port from 22 to 2200
+### Change the SSH port from 22 to 2200
 `$ sudo nano /etc/ssh/sshd_config`
 
 Now, logins must be done using port 2200 as follows:
@@ -37,7 +37,7 @@ Now, logins must be done using port 2200 as follows:
 `$ ssh grader@52.54.9.161 -I ~/.ssh/grader -p 2200`
 >This will also disable the use of the web server login on the AWS site since it assumes you're using port 22 for SSH.  You'll need to SSH into the server from a shell or other utility.
 
-#### Configure UFW (Uncomplicated Firewall)
+### Configure UFW (Uncomplicated Firewall)
 Start by blocking all incoming connections:
 
 `$ sudo ufw default deny incoming`
@@ -71,11 +71,11 @@ Verify the firewall is running by checking the status:
 
 `$ sudo ufw status`
 
-#### Install Apache
+### Install Apache
 `$ sudo apt-get install apache2`
-#### Install Apache library for WSGI
+### Install Apache library for WSGI
 `$ sudo apt-get install libapache2-mod-wsgi`
-#### Install PostgreSQL
+### Install PostgreSQL
 `$ sudo apt-get install postgresql postgresql-contrib`
 
 Create a PostgreSQL user `catalog`
@@ -85,7 +85,7 @@ Create a PostgreSQL user `catalog`
 Create a database `catalog`
 
 `$ sudo -u postgres createdb -O catalog catalog`
-#### Install several packages needed for the web app to function
+### Install several packages needed for the web app to function
 `$ sudo apt-get install python-psycopg2`
 
 `$ sudo apt-get install python-flask`
@@ -100,7 +100,7 @@ Create a database `catalog`
 
 `$ sudo pip install httplib2`
 
-#### Update all currently installed packages
+### Update all currently installed packages
 Update the package indexes
 
 `$ sudo apt-get update`
