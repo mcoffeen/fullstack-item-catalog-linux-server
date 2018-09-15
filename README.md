@@ -7,16 +7,21 @@ SSH port: `2200`
 # Configuring the Server
 #### Create `grader` user
 `$ sudo useradd -m -s grader`
+
 #### Give `grader` sudo privileges
 `$ sudo usermod -aG sudo grader`
+
 #### Generate key pairs for `grader`
 Generate the key pairs on the local machine and copy to authorized_keys file on server
 #### Log on to server as `grader`
 First, cd to the location where the .ssh folder is stored on the local machine.
+
 `$ ssh grader@52.54.9.161 -i ~/.ssh/grader`
 #### Disable root login and disable password logins
 `$ sudo nano /etc/ssh/sshd_config`
+
 Change line to: "PermitRootLogin no"
+
 Uncomment "PasswordAuthentication no"
 
 Restart the SSH service to allow the changes to take affect.
