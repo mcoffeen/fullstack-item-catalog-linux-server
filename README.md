@@ -102,10 +102,13 @@ Create a database `catalog`
 
 #### Update all currently installed packages
 Update the package indexes
+
 `$ sudo apt-get update`
 
 Upgrade the installed packages
+
 `$ sudo apt-get upgrade`
+
 ---
 ## Modify your app structure to be ready for the deployment
 The following documentation was helpful in creating the WSGI application:
